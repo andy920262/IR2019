@@ -9,6 +9,7 @@ def build(args):
             args.model_dir)
     model = VSM(inv_file, doc_list, vocab_freq, doc_len)
     model.save('./model.pl')
+    return model
 
 def run(args):
     if args.build:
