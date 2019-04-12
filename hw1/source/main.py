@@ -12,7 +12,7 @@ def build(args):
 
 def run(args):
     if args.build:
-        build(args)
+        model = build(args)
 
     if args.best:
         args.rocchio = True
@@ -22,7 +22,7 @@ def run(args):
         model = VSM(model_path=args.load_model)
     except:
         print('failed to load model, build from raw.')
-        build(args)
+        model = build(args)
 
     query_list, query_id = process_query(args.query_file)
     output_file = open(args.ranked_list, 'w+')

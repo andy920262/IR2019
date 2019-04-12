@@ -8,7 +8,7 @@ except ImportError:
 class VSM(object):
     def __init__(self, inv_file=None, doc_list=None, vocab_freq=None, 
             doc_len=None, tf_type='bm25', idf_type='idf', doc_len_norm=True,
-            k3=250, k1=1.2, b=0.75, model_path=None):
+            k3=500, k1=2.0, b=0.75, model_path=None):
         if model_path != None:
             self.load(model_path)
         else:
