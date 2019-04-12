@@ -11,9 +11,9 @@ def mean_average_precision(retrieved, answer):
 
 if __name__ == '__main__':
     import pandas as pd
-    retrieved = pd.read_csv('./ensemble.csv')[['retrieved_docs']].values
-    #retrieved = pd.read_csv('./output.csv')[['retrieved_docs']].values
-    answer = pd.read_csv('../queries/ans_train.csv')[['retrieved_docs']].values
+    import sys
+    retrieved = pd.read_csv(sys.argv[1])[['retrieved_docs']].values
+    answer = pd.read_csv(sys.argv[2])[['retrieved_docs']].values
     total_map = []
     for x, y in zip(retrieved, answer):
         x = x[0].strip().split(' ')

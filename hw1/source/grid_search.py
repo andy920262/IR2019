@@ -20,11 +20,9 @@ def product_dict(d):
     return (dict(zip(d.keys(), values)) for values in product(*d.values()))
 
 def run():
-    #print([p for p in product(*params.values())])
     import pandas as pd
     model = VSM(model_path='./model.pl')
     query_list, query_id = process_query('../queries/query-train.xml')
-    query_list_test, query_id_test = process_query('../queries/query-test.xml')
     answer = pd.read_csv('../queries/ans_train.csv')[['retrieved_docs']].values
     answer = [a[0].strip().split(' ') for a in answer]
 
@@ -45,11 +43,6 @@ def run():
         model_str = 'k1=%.2f,b=%.2f,k3=%d,idf_type=%s,rocchio=%s,n=%d,k=%d,score=%.5f' % (p['k1'], p['b'], p['k3'], p['idf'], p['rocchio'], p['n'], p['k'], score)
         print(model_str)
 
-        output_file = open('outputs/' + model_str + '.csv', 'w+')
-        print('query_id,retrieved_docs', file=output_file)
-        for i, query in enumerate(query_list_test):
-            doc_id, doc_score = model.get_ranking(query, p['rocchio'], p['n'], p['k'])
-            print('%s,%s' % (query_id_test[i], ' '.join(doc_id[:100])), file=output_file)
 
 if __name__ == '__main__':
     run()
